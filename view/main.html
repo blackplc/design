@@ -1,0 +1,56 @@
+<div ng-init="initData()">
+
+    <div class="navbar navbar-default navbar-fixed-top" >
+        <div class="container">
+            <!--和container-fluid的区别在于container有随变的margin left right-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#nav-options">
+                    <span class="sr-only">surprise!!</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="img/w.png" alt="brand">在线作业系统
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="nav-options">
+                <ul class="nav navbar-nav">
+                    <li><a ng-click="jump('problem')">问题</a></li>
+                    <li><a href="#/">测试</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            课件 <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:;">jmeter</a></li>
+                            <li><a href="#/">EJB</a></li>
+                            <li><a href="#/">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#/">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">帮助</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            {{class.name}} <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="a in classList"><a ng-click="chooseClass(a)">{{a.name}}</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:;">{{username}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main_div" ui-view ></div>
+
+</div>

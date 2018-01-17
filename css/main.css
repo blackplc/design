@@ -1,0 +1,173 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    cursor: pointer;
+}
+
+.login::-webkit-input-placeholder ::-moz-placeholder :-ms-input-placeholder {
+    /*text-align: center;*/
+    /*color: white;*/
+}
+
+.login::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: white;
+}
+
+.bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.content_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*width: 55%;*/
+}
+
+.main_div {
+    display: flex;
+    justify-content: center;
+    margin-top: 55px;
+    width: 100vw;
+    overflow: auto;
+    height: calc(100vh - 55px);
+}
+
+.main_div::-webkit-scrollbar-thumb {
+    background: #b7b7b7;
+    border-radius: 4px;
+}
+
+.main_div::-webkit-scrollbar {
+    width: 6px;
+}
+
+.main_div::-webkit-scrollbar-corner {
+    border-radius: 4px;
+}
+
+.main_div::-webkit-scrollbar-track-piece {
+    background: rgba(134, 134, 134, 0.36);
+    border-radius: 4px;
+}
+
+button {
+    outline: none;
+}
+
+.maincontent {
+    display: flex;
+    justify-content: center;
+}
+
+.error {
+    float: right;
+    font-weight: normal;
+    font-size: 6px;
+    color: red;
+}
+
+.login_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.login {
+    background: transparent;
+    text-align: center;
+    margin: 1vw 2vw;
+    font-size: 20px;
+    display: block;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid black;
+    /*color: #337ab7;*/
+    color: white;
+    border-radius: 0px;
+}
+
+.login_button {
+    /*height:4vh;*/
+    border: none;
+    border-radius: 3px;
+    margin: 1vw 2vw;
+    width: calc(100% - 3vw);
+}
+
+.title_h2 {
+    margin-bottom: 20px;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+.form_div {
+    position: relative;
+    border: 1px solid #b0b0b0;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 500px;
+    display: table;
+    padding: 15px;
+    padding-top: 0;
+}
+
+.form_submit_div {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.form_items {
+    margin: 0 30px;
+    flex: 0 0 auto;
+}
+
+.form_items_title {
+    font-weight: bold;
+    padding: 15px;
+    border-bottom: 1px solid #b0b0b0;
+}
+
+.form_items_sm {
+    width: 20%;
+}
+
+.form_items_md {
+    width: 40%;
+}
+
+.form_items_textarea {
+    resize: none;
+    width: calc(100% - 60px);
+    height: 300px;
+}
+
+.pre {
+    white-space: pre-wrap;
+    padding: 10px 15px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.problem_detail_div {
+    width: 100%;
+}

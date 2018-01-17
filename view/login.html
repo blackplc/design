@@ -1,0 +1,8 @@
+<div class="login_div" ng-controller="loginCtrl" ng-init="initData()">
+    <h1 style="text-indent:3vw;letter-spacing: 3vw;margin-bottom: 150px;color: white">在线评测系统</h1>
+    <div class="login_div">
+        <input type="text" autofocus class="input-lg login" placeholder="帐号" ng-model="username" ng-keydown='keydown(e)'>
+        <input type="password" class="input-lg login" placeholder="密码" ng-model="password" ng-keydown='keydown(e)'>
+        <button class=" btn-lg btn-primary login_button" ng-click="login()">登录</button>
+    </div>
+</div>

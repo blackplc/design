@@ -1,0 +1,35 @@
+<div ng-controller="problemListCtrl" class="content_div col-lg-7 col-md-7 col-sm-7 col-xs-12" ng-init="initData()">
+    <h2 class="title_h2">{{title}}</h2>
+    <div class="toolbar">
+        <button class="btn btn-primary" ng-if="userType" ng-click="addProblem()"><span class="glyphicon glyphicon-plus"></span>添加题目</button>
+    </div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th class="col-xs-1 col-sm-1"></th>
+                <th class="col-xs-1 col-sm-1">编号</th>
+                <th class="col-xs-5 col-sm-5">标题</th>
+                <th class="col-xs-1 col-sm-1">提交量</th>
+                <th class="col-xs-1 col-sm-1">通过量</th>
+                <th class="col-xs-3 col-sm-3" ng-if="userType">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="a in problemList" ng-if="userType || a.hide" ng-click="click(a)" class="pointer">
+                <td><span ng-class="{'glyphicon-remove':a.submitState==2,'glyphicon-ok':a.submitState==1}" class="glyphicon"></span></td>
+                <td>{{$index + 1}} </td>
+                <td>{{a.title}}</td>
+                <td>{{a.totalSunmit}}</td>
+                <td>{{a.passAmount}}</td>
+                <td ng-if="userType">
+                    <button class="btn btn-sm btn-primary" ng-click="update(a,$event)"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+                    <button class="btn btn-sm btn-primary" ng-click="update(a,$event)"><span class="glyphicon glyphicon-trash"></span>删除</button>
+                    <button ng-if="a.hide" class="btn btn-sm btn-danger" ng-click="toggle(a,$event)"><span class="glyphicon glyphicon-eye-close"></span>隐藏</button>
+                    <button ng-if="!a.hide" class="btn btn-sm btn-success" ng-click="toggle(a,$event)"><span class="glyphicon glyphicon-eye-open"></span>显示</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ul  uib-pagination total-items="40" ng-model="cur" ng-change="change()" items-per-page="15"
+                previous-text="<" next-text=">" max-size="5"></ul>
+</div>

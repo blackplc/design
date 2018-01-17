@@ -1,0 +1,66 @@
+<div ng-controller="problemCtrl" class="content_div col-lg-7 col-md-7 col-sm-7 col-xs-12" ng-init="initData()">
+    <h1 style="color: #337ab7">{{problem.title}}</h1>
+    <span>
+        Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 65536/32768 K (Java/Others)
+    </span>
+    <span>
+        Total Submission(s): 394981    Accepted Submission(s): 76471
+    </span>
+    <div style="height: 40px;width: 100%"></div>
+    <div class="panel panel-primary problem_detail_div">
+        <div class="panel-heading">
+            <h1 class="panel-title">问题描述</h1>
+        </div>
+        <div class="panel-body panel-body pre">{{problem.description}}</div>
+    </div>
+
+    <div class="panel panel-primary problem_detail_div">
+        <div class="panel-heading">
+            <h1 class="panel-title">输入描述</h1>
+        </div>
+        <div class="panel-body pre">{{problem.inputDes}}</div>
+    </div>
+
+    <div class="panel panel-primary problem_detail_div">
+        <div class="panel-heading">
+            <h1 class="panel-title">输出描述</h1>
+        </div>
+        <div class=" panel-body pre">{{problem.outputDes}}</div>
+    </div>
+
+    <div class="panel panel-primary problem_detail_div">
+        <div class="panel-heading">
+            <h1 class="panel-title">输入</h1>
+        </div>
+        <div class=" panel-body pre">{{problem.input}}</div>
+    </div>
+
+    <div class="panel panel-primary problem_detail_div">
+        <div class="panel-heading">
+            <h1 class="panel-title">输出</h1>
+        </div>
+        <div class=" panel-body pre">{{problem.output}}</div>
+    </div>
+
+    <div class="btn-group"><button class="btn btn-primary" data-toggle="modal" data-target="#submitModal">提交</button><button class="btn btn-default">评测状态</button></div>
+
+    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">代码提交</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea style="width: 100%;height: 70%;resize: none;border-radius: 3px" ng-model="code"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="reset()">重置</button>
+                    <button type="button" class="btn btn-primary" ng-click="submit()">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

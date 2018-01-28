@@ -14,8 +14,10 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
             return {
                 problemId:1,
                 title:'abc',
+                description:'dedddeeddededeeddeesssede\ndesddede\ndwesdsededwweede\ndes',
                 totalSunmit:Math.ceil(Math.random()*50) + 20,
                 passAmount:Math.ceil(Math.random()*20),
+                problemType:5,
                 submitState:1,
                 hide:1
             }
@@ -23,16 +25,20 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
         var p2 = {
             problemId:2,
             title:'abdc',
+            description:'dedddeeddededeeddeesssede\ndesddede\ndwesdsededwweede\ndes',
             totalSunmit:40,
             passAmount:15,
+            problemType:5,
             submitState:3,
             hide:0
         };
         var p3 = {
             problemId:3,
             title:'abgc',
+            description:'dedddeeddededeeddeesssede\ndesddede\ndwesdsededwweede\ndes',
             totalSunmit:50,
             passAmount:22,
+            problemType:5,
             submitState:2,
             hide:1
         }
@@ -72,11 +78,15 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
 
     $scope.click = function (obj) {
         console.log(obj)
-        goto_view('main/'+$scope.class.name+'/problem')
+        goto_view('main/problemDetail')
     }
 
     $scope.update = function (obj, $event) {
-        console.log(obj);
+        sessionStorage.editProblemParam = JSON.stringify({
+            type:'update',
+            problem:obj
+        });
+        goto_view('main/editProblem');
         $event.stopPropagation();
     }
 

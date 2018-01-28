@@ -1,17 +1,33 @@
 "use strict"
-var newProblem = angular.module('newProblem',['OJ']);
-newProblem.controller('newProblemCtrl',function ($scope, APIService) {
+var editProblem = angular.module('editProblem',['OJ']);
+editProblem.controller('editProblemCtrl',function ($scope, APIService) {
     $scope.initData = function () {
 
-        //判断题参数init
-        $scope.initJudgement();
+        $scope.param = JSON.parse(sessionStorage.editProblemParam);
+
+        $scope.problemTypes = constant.problemTypes;
+
+        if($scope.param.type === 'new'){
+            $scope.pageTitle = '新建问题';
+            $scope.submitContent = '确认新建';
+            //题目类型初始化
+            $scope.problemType = constant.problemTypes[0];
+            //判断题参数init
+            $scope.initJudgement();
+        } else if($scope.param.type === 'update'){
+            $scope.pageTitle = '更新问题';
+            $scope.submitContent = '确认更新';
+            //题目类型初始化
+            $scope.problemType = constant.problemTypes[$scope.param.problem.problemType - 1];
+            $scope.title = $scope.param.problem.title;
+            $scope.description = $scope.param.problem.description;
+        }
+
 
 
     }
 
     $scope.initJudgement = function () {
-        $scope.problemTypes = constent.problemTypes;
-        $scope.problemType = constent.problemTypes[0];
         $scope.judge = 'yes'
     }
 

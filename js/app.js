@@ -1,5 +1,5 @@
 "use strict";
-var myapp = angular.module('gP',['ui.router','ngAnimate', 'ngTouch','ui.bootstrap','main', 'login','problemList','problem','addProblem','newProblem','OJ']);
+var myapp = angular.module('gP',['ui.router','ngAnimate', 'ngTouch','ui.bootstrap','main', 'login','problemList','problemDetail','addProblem','editProblem','OJ']);
 function config($stateProvider, $urlRouterProvider){
     $stateProvider.state('login',{
         url:'/login',
@@ -9,17 +9,17 @@ function config($stateProvider, $urlRouterProvider){
         templateUrl: 'view/main.html',
         controller:'mainCtrl'
     }).state('main.problemList',{
-        url:'/:className/problemList',
-        templateUrl: 'view/problemList.html'
-    }).state('main.problem',{
-        url:'/:className/problem',
-        templateUrl: 'view/problem.html'
+        url:'/problemList',
+        templateUrl: 'view/problem/problemList.html'
+    }).state('main.problemDetail',{
+        url:'/problemDetail',
+        templateUrl: 'view/problem/problemDetail.html'
     }).state('main.addProblem',{
         url:'/addProblem',
-        templateUrl:'view/addProblem.html'
-    }).state('main.newProblem',{
-        url:'/newProblem',
-        templateUrl:'view/newProblem.html'
+        templateUrl:'view/problem/addProblem.html'
+    }).state('main.editProblem',{
+        url:'/editProblem',
+        templateUrl:'view/problem/editProblem.html'
     })
     $urlRouterProvider.otherwise('/login');
 }

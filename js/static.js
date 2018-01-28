@@ -1,7 +1,7 @@
-let constent = function () {
+let constant = function () {
     "use strict"
-    let constent = {};
-    constent.problemTypes = [
+    let constant = {};
+    constant.problemTypes = [
         {
             name:'判断题',
             no:1
@@ -19,5 +19,5 @@ let constent = function () {
             no:5
         }
     ]
-    return constent;
+    return constant;
 }()

@@ -1,5 +1,5 @@
-<div ng-controller="newProblemCtrl" class="content_div col-lg-7 col-md-7 col-sm-7 col-xs-12" ng-init="initData()">
-    <h2 class="title_h2">新建问题</h2>
+<div ng-controller="editProblemCtrl" class="content_div col-lg-7 col-md-7 col-sm-7 col-xs-12" ng-init="initData()">
+    <h2 class="title_h2">{{pageTitle}}</h2>
     <div class="form_div">
         <form novalidate name="problemForm" ng-submit="submit()">
             <h4 class="form_items_title">选择题目类型<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.problemType.$invalid && problemForm.submitted">此为必填项</span></h4>
@@ -76,7 +76,7 @@
             </div>
             <!--编程题-->
 
-            <div class="form_submit_div"><input type="submit" class="btn btn-success" value="确认新建"></div>
+            <div class="form_submit_div"><input type="submit" class="btn btn-success" value="{{submitContent}}"></div>
         </form>
     </div>
 </div>

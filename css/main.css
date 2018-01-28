@@ -166,7 +166,10 @@ button {
 .textarea_md{
     height: 200px;
 }
-
+.big_font{
+    font-size: 25px;
+    font-weight: bold;
+}
 .pre {
     white-space: pre-wrap;
     padding: 10px 15px;

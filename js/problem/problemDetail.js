@@ -1,5 +1,5 @@
-var problem = angular.module('problem',['OJ']);
-problem.controller('problemCtrl',function ($scope, APIService) {
+var problemDetail = angular.module('problemDetail',['OJ']);
+problemDetail.controller('problemDetailCtrl',function ($scope, APIService) {
     $scope.initData = function () {
         $scope.problem = {
             title:'求平均分',

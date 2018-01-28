@@ -6,7 +6,7 @@
             <input type="text" class="form-control" ng-keypress="todoSomething($event)" ng-model="keyword" placeholder="请输入关键词">
             <span class="input-group-btn "><button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span>搜索</button></span>
         </div>
-        <button class="btn btn-success btn-sm">确认添加</button>
+        <button class="btn btn-success btn-sm" ng-click="submit()">确认添加</button>
     </div>
     <div style="width: 100%">
         <table class="table table-hover table-striped">
@@ -19,8 +19,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="a in problemList" ng-if="userType || a.hide" ng-click="check(a)" class="pointer" uib-popover-template="'template.html'" popover-title="问题描述" popover-trigger="'mouseenter'" popover-placement="top">
-                <td><span ng-class="{'glyphicon-ok':a.checked}" class="glyphicon"></span></td>
+            <tr ng-repeat="a in problemList" ng-if="userType || a.hide" ng-click="check(a.problemId)" class="pointer" uib-popover-template="'template.html'" popover-title="问题描述" popover-trigger="'mouseenter'" popover-placement="top">
+                <td><span ng-class="{'glyphicon-ok':contain(a.problemId)}" class="glyphicon"></span></td>
                 <td>{{a.problemId}} </td>
                 <td>{{a.title}}</td>
                 <td ng-if="userType">

@@ -7,69 +7,92 @@ addProblem.controller('addProblemCtrl', function ($scope, APIService, $sce) {
         $scope.problemSet = new Set();
         var props = JSON.parse(sessionStorage.props);
         $scope.title = '添加问题到' + props.class + '的' + (props.from === 'problemList' ? '问题列表' : props.from === 'homework' ? '第' + props.times + '次作业' : '考试');
+        var id = 1;
         var p1 = function () {
             return {
-                problemId: 1,
+                problemId: id++,
                 title: 'abc',
-                description: 'dddeessss\n\n\nask基督教卡上的疆阿克苏的金卡黑色贷记卡上的空间啊圣诞卡觉得哈斯看见的啊黑色短裤Jason华东科技',
-                checked:0,
+                description: 'dedddeeddededeeddeesssede\ndesddede\ndwesdsededwweede\ndes',
+                totalSunmit: Math.ceil(Math.random() * 50) + 20,
+                passAmount: Math.ceil(Math.random() * 20),
+                problemType: 5,
+                checked: 0,
+                submitState: 1,
                 hide: 1
-            };
+            }
         };  // 13.83    28.4     2.43    1.41
         var p2 = {
-            problemId: 2,
+            problemId: id++,
             title: 'abdc',
-            description: 'dddeessss',
-            checked:0,
+            description: 'dedddeeddededeeddeesssede\ndesddede\ndwesdsededwweede\ndes',
+            totalSunmit: 40,
+            passAmount: 15,
+            problemType: 5,
+            checked: 0,
+            submitState: 3,
             hide: 0
         };
         var p3 = {
-            problemId: 3,
+            problemId: id++,
             title: 'abgc',
-            description: 'dddeessss',
-            checked:0,
+            description: 'dedddeeddededeeddeesssede\ndesddede\ndwesdsededwweede\ndes',
+            totalSunmit: 50,
+            passAmount: 22,
+            problemType: 5,
+            checked: 0,
+            submitState: 2,
             hide: 1
         }
         $scope.problemList = [];
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
-        $scope.problemList.push(new p1());
         $scope.problemList.push(p2);
         $scope.problemList.push(p3);
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
+        $scope.problemList.push(new p1());
 
     }
 
     $scope.newProblem = function () {
-        goto_view('main/newProblem');
+        sessionStorage.editProblemParam = JSON.stringify({
+            type: 'new'
+        });
+        goto_view('main/editProblem');
     }
 
     $scope.todoSomething = function (event) {
-        if(event.keyCode==13){//回车
+        if (event.keyCode == 13) {//回车
             console.log('!!')
         }
     }
 
-    $scope.check = function(obj){
-        obj.checked = 1 - obj.checked;
-        if(obj.checked === 1){
-            $scope.problemSet.add(obj.problemId)
+    $scope.check = function (problemId) {
+        if ($scope.problemSet.has(problemId)) {
+            $scope.problemSet.delete(problemId)
+        } else {
+            $scope.problemSet.add(problemId)
+        }
+    }
+
+    $scope.contain = function (problemId) {
+        if($scope.problemSet.has(problemId)){
+            return true;
         }else{
-            $scope.problemSet.delete(obj.problemId)
+            return false;
         }
     }
 
     $scope.submit = function () {
         var problemArray = Array.from($scope.problemSet);
-        console.log(problemArray,typeof problemArray,$scope.problemList)
+        console.log(problemArray, typeof problemArray, $scope.problemList)
     }
 })

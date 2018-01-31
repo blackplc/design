@@ -2,14 +2,16 @@
 var problemList = angular.module('problemList',['OJ']);
 problemList.controller('problemListCtrl',function ($scope, $stateParams,APIService) {
     $scope.initData = function () {
+        $scope.title = JSON.parse(sessionStorage.class).name + "问题列表";
+        // $('.nav.navbar-nav').eq(0).children().removeClass('active');
+        $('.nav.navbar-nav').eq(0).children().eq(0).addClass('active');
         $scope.userType = 1;
         $scope.hide = 1;
-        if(sessionStorage.getItem('class') == null){
+        if(sessionStorage.class == null){
             layer.msg('请先选择班级！')
             history.back();
         }
         $scope.$parent.$parent.class = JSON.parse(sessionStorage.class);
-        $scope.title = JSON.parse(sessionStorage.class).name + "问题列表";
         var p1 = function () {
             return {
                 problemId:1,
@@ -59,7 +61,6 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
         $scope.problemList.push(p2);
         $scope.problemList.push(p3);
         $scope.cur = 1;
-        $('.nav.navbar-nav').eq(0).children().eq(0).addClass('active');
 
     }
 

@@ -83,6 +83,15 @@ addProblem.controller('addProblemCtrl', function ($scope, APIService, $sce) {
         }
     }
 
+    $scope.update = function (obj, $event) {
+        sessionStorage.editProblemParam = JSON.stringify({
+            type:'update',
+            problem:obj
+        });
+        goto_view('main/editProblem');
+        $event.stopPropagation();
+    }
+
     $scope.contain = function (problemId) {
         if($scope.problemSet.has(problemId)){
             return true;

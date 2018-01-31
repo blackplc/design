@@ -1,8 +1,8 @@
 var OJ = angular.module("OJ",[]);
 OJ.factory('APIService',function ($http) {
     var service = {
-        token: sessionStorage.getItem('token'),
-        userId: sessionStorage.getItem('userId')
+        token: sessionStorage.token,
+        userId: sessionStorage.userId
     }
     service.get = function (url) {
         return $http({
@@ -66,8 +66,8 @@ OJ.factory('APIService',function ($http) {
             name:'d',
             id:654321
         }]
-        sessionStorage.setItem('username',username);
-        sessionStorage.setItem('classList',JSON.stringify(classList));
+        sessionStorage.username = username;
+        sessionStorage.classList = JSON.stringify(classList);
         res.data = {};
         res.data.http_status = 200;
         return new Promise(function (resolve, reject) {

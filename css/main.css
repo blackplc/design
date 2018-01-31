@@ -31,31 +31,46 @@ a {
     /*width: 55%;*/
 }
 
-.main_div {
-    display: flex;
-    justify-content: center;
-    margin-top: 55px;
-    width: 100vw;
-    overflow: auto;
-    height: calc(100vh - 55px);
+.main_wraper {
+    margin-top: 51px;
+    width: 100%;
+    overflow-y: auto;
+    height: calc(100vh - 51px);
 }
 
-.main_div::-webkit-scrollbar-thumb {
+.main_wraper::-webkit-scrollbar-thumb {
     background: #b7b7b7;
     border-radius: 4px;
 }
 
-.main_div::-webkit-scrollbar {
+.main_wraper::-webkit-scrollbar {
     width: 6px;
 }
 
-.main_div::-webkit-scrollbar-corner {
+.main_wraper::-webkit-scrollbar-corner {
     border-radius: 4px;
 }
 
-.main_div::-webkit-scrollbar-track-piece {
+.main_wraper::-webkit-scrollbar-track-piece {
     background: rgba(134, 134, 134, 0.36);
     border-radius: 4px;
+}
+
+.content_wraper {
+    /*flex: 1 0 auto;*/
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex:1 0 auto;
+    /*position: ;*/
 }
 
 button {
@@ -159,17 +174,19 @@ button {
     height: 300px;
 }
 
-.textarea_sm{
+.textarea_sm {
     height: 70px;
 }
 
-.textarea_md{
+.textarea_md {
     height: 200px;
 }
-.big_font{
+
+.big_font {
     font-size: 25px;
     font-weight: bold;
 }
+
 .pre {
     white-space: pre-wrap;
     padding: 10px 15px;
@@ -177,6 +194,10 @@ button {
 
 .pointer {
     cursor: pointer;
+}
+
+.green td {
+    background: #f1ffed;
 }
 
 .problem_detail_div {

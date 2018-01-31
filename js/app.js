@@ -1,25 +1,28 @@
 "use strict";
-var myapp = angular.module('gP',['ui.router','ngAnimate', 'ngTouch','ui.bootstrap','main', 'login','problemList','problemDetail','addProblem','editProblem','OJ']);
-function config($stateProvider, $urlRouterProvider){
-    $stateProvider.state('login',{
-        url:'/login',
+var myapp = angular.module('gP', ['ui.router', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'main', 'login', 'problemList', 'problemDetail', 'addProblem', 'editProblem', 'homeworkList', 'OJ']);
+function config($stateProvider, $urlRouterProvider) {
+    $stateProvider.state('login', {
+        url: '/login',
         templateUrl: 'view/login.html'
-    }).state('main',{
-        url:'/main',
-        templateUrl: 'view/main.html',
-        controller:'mainCtrl'
-    }).state('main.problemList',{
-        url:'/problemList',
+    }).state('main', {
+        url: '/main',
+        templateUrl: 'view/main.html'
+        // controller: 'mainCtrl'
+    }).state('main.problemList', {
+        url: '/problemList',
         templateUrl: 'view/problem/problemList.html'
-    }).state('main.problemDetail',{
-        url:'/problemDetail',
+    }).state('main.problemDetail', {
+        url: '/problemDetail',
         templateUrl: 'view/problem/problemDetail.html'
-    }).state('main.addProblem',{
-        url:'/addProblem',
-        templateUrl:'view/problem/addProblem.html'
-    }).state('main.editProblem',{
-        url:'/editProblem',
-        templateUrl:'view/problem/editProblem.html'
+    }).state('main.addProblem', {
+        url: '/addProblem',
+        templateUrl: 'view/problem/addProblem.html'
+    }).state('main.editProblem', {
+        url: '/editProblem',
+        templateUrl: 'view/problem/editProblem.html'
+    }).state('main.homeworkList', {
+        url: '/homeworkList',
+        templateUrl: 'view/homework/homeworkList.html'
     })
     $urlRouterProvider.otherwise('/login');
 }
@@ -33,7 +36,11 @@ function config($stateProvider, $urlRouterProvider){
 //     });
 // }
 myapp.config(config);
-myapp.run((function($rootScope, $location) {         $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {    console.log(evt, toState, toParams, fromState, fromParams,$location)     });     }));
+myapp.run((function ($rootScope, $location) {
+    $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
+        console.log(evt, toState, toParams, fromState, fromParams, $location)
+    });
+}));
 
 var index;
 function loading() {

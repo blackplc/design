@@ -19,7 +19,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="a in problemList" ng-if="userType || a.hide" ng-click="check(a.problemId)" class="pointer" uib-popover-template="'template.html'" popover-title="问题描述" popover-trigger="'mouseenter'" popover-placement="top">
+            <tr ng-repeat="a in problemList" ng-if="userType || a.hide" ng-click="check(a.problemId)" ng-class="{'green':contain(a.problemId)}" class="pointer" uib-popover-template="'template.html'" popover-title="问题描述" popover-trigger="'mouseenter'" popover-placement="top">
                 <td><span ng-class="{'glyphicon-ok':contain(a.problemId)}" class="glyphicon"></span></td>
                 <td>{{a.problemId}} </td>
                 <td>{{a.title}}</td>

@@ -2,13 +2,14 @@
 var main = angular.module('main',['OJ']);
 main.controller('mainCtrl',function ($scope, APIService) {
     $scope.initData = function () {
+        // console.log($scope)
         $scope.ui()
         $scope.username = sessionStorage.username;
-        if(sessionStorage.class === null){
+        if(sessionStorage.class === null || sessionStorage.class === undefined){
             $scope.class = {};
             $scope.class.name = '请选择班级';
         }else{
-            $scope.class = sessionStorage.class;
+            $scope.class = JSON.parse(sessionStorage.class);
         }
         $scope.classList = JSON.parse(sessionStorage.classList);
 
@@ -26,7 +27,7 @@ main.controller('mainCtrl',function ($scope, APIService) {
     }
 
     $scope.jump = function (word) {
-        if($scope.class === null){
+        if($scope.class.id === null || $scope.class.id === undefined){
             layer.msg('请先选择班级！');
             return;
         }

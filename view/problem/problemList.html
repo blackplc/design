@@ -1,4 +1,4 @@
-<div ng-controller="problemListCtrl" class="content_div col-lg-7 col-md-7 col-sm-7 col-xs-12" ng-init="initData()">
+<div ng-controller="problemListCtrl" class="content_div col-lg-8 col-md-8 col-sm-8 col-xs-12" ng-init="initData()">
     <h2 class="title_h2">{{title}}</h2>
     <div class="toolbar">
         <button class="btn btn-sm btn-primary" ng-if="userType" ng-click="addProblem()"><span class="glyphicon glyphicon-plus"></span>添加题目</button>
@@ -8,10 +8,10 @@
             <tr>
                 <th class="col-xs-1 col-sm-1"></th>
                 <th class="col-xs-1 col-sm-1">编号</th>
-                <th class="col-xs-5 col-sm-5">标题</th>
+                <th class="col-xs-4 col-sm-4">标题</th>
                 <th class="col-xs-1 col-sm-1">提交量</th>
                 <th class="col-xs-1 col-sm-1">通过量</th>
-                <th class="col-xs-3 col-sm-3" ng-if="userType">操作</th>
+                <th class="col-xs-4 col-sm-4" ng-if="userType">操作</th>
             </tr>
         </thead>
         <tbody>

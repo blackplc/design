@@ -4,7 +4,26 @@ editProblem.controller('editProblemCtrl',function ($scope, APIService) {
     $scope.initData = function () {
 
         $scope.param = JSON.parse(sessionStorage.editProblemParam);
+        // $("#input").fileinput({showCaption: false}); //输入框部件只显示选择文件按钮，隐藏标题
+        $("#input-21").fileinput({
+            language: 'zh',
+            previewFileType: "image",
+            browseClass: "btn btn-primary",
+            browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+            // showRemove: false,
+            // showClose: false,
+            showUpload: false,
+            showUploadedThumbs: false,
+            initialCaption: "选择图片上传（可一次选多张）",
 
+            removeClass: "btn btn-danger",
+            // removeLabel: "Delete",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+            // uploadClass: "btn btn-info upload",
+            // uploadLabel: "Upload",
+            // uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
+        });
+        // $(".upload").click(alert('!'))
         $scope.problemTypes = constant.problemTypes;
 
         if($scope.param.type === 'new'){
@@ -89,6 +108,7 @@ editProblem.controller('editProblemCtrl',function ($scope, APIService) {
     }
 
     $scope.submit = function () {
+        // 先调用图片的组件的update方法（post参数写在url上），等后台返回保存后的图片序号后再用图片序号提交其他数据
         // console.log($scope.optionContent['B'])
         console.log($scope.problemForm)
         // console.log($scope.problemForm.optionAmount.$invalid)

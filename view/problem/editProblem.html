@@ -1,4 +1,4 @@
-<div ng-controller="editProblemCtrl" class="content_div col-lg-7 col-md-7 col-sm-7 col-xs-12" ng-init="initData()">
+<div ng-controller="editProblemCtrl" class="content_div col-lg-8 col-md-8 col-sm-8 col-xs-12" ng-init="initData()">
     <h2 class="title_h2">{{pageTitle}}</h2>
     <div class="form_div">
         <form novalidate name="problemForm" ng-submit="submit()">
@@ -8,6 +8,8 @@
             <input class="form-control form_items_md form_items" name="title" ng-model="title" required>
             <h4 class="form_items_title">题目描述<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.description.$invalid && problemForm.submitted">此为必填项</span></h4>
             <textarea class="form-control form_items_textarea form_items" name="description" ng-model="description" required></textarea>
+            <h4 class="form_items_title">描述图片</h4>
+            <input id="input-21" type="file" class="form-control form_items_md form_items" accept="image/*" multiple>
             <!--判断题-->
             <div ng-if="problemType.no === 1">
                 <h4 class="form_items_title">答案是否正确<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.judge.$invalid">此为必填项</span></h4>

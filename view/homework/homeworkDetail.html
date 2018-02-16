@@ -1,0 +1,83 @@
+<div ng-controller="homeworkDetailCtrl" class="content_div col-lg-8 col-md-8 col-sm-8 col-xs-12" ng-init="initData()">
+    <!--<h2 class="margin_bottom">{{title}}</h2>-->
+    <span>总分:{{homework.totalScore}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得分:{{homework.score}}</span>
+    <span ng-if="homework.state === 1">剩余时间:{{leftTime}}</span>
+    <span ng-if="homework.state === 2">开始时间:{{homework.startTime | date:'yy-MM-dd HH:mm'}}  结束时间:{{homework.endTime| date:'yy-MM-dd HH:mm'}}</span>
+    {{message}}
+    <div class=" margin_vertical">
+        <button ng-repeat="a in homework.problemSet" class="btn btn-default col-md-3 col-sm-3 col-xs-3 text_overflow"
+                uib-popover="{{a.title}}" popover-placement="top" popover-trigger="'mouseenter'"
+                ng-class="{0:'btn-default',1:'btn-danger',2:'btn-success'}[a.submitState]" ng-model="radioModel.i"
+                uib-btn-radio="$index"><span class="badge">{{a.problemType | toProblemType | limitTo :1}}</span>{{a.title}}
+        </button>
+    </div>
+    <div class="panel panel-primary width_full">
+        <div class="panel-heading">
+            <h1 class="panel-title">问题描述</h1>
+        </div>
+        <div class="panel-body panel-body pre">{{problem.description}}</div>
+    </div>
+
+    <div ng-if="problem.inputDes" class="panel panel-primary width_full">
+        <div class="panel-heading">
+            <h1 class="panel-title">输入描述</h1>
+        </div>
+        <div class="panel-body pre">{{problem.inputDes}}</div>
+    </div>
+
+    <div ng-if="problem.outputDes" class="panel panel-primary width_full">
+        <div class="panel-heading">
+            <h1 class="panel-title">输出描述</h1>
+        </div>
+        <div class=" panel-body pre">{{problem.outputDes}}</div>
+    </div>
+
+    <div ng-if="problem.input" class="panel panel-primary width_full">
+        <div class="panel-heading">
+            <h1 class="panel-title">输入</h1>
+        </div>
+        <div class=" panel-body pre">{{problem.input}}</div>
+    </div>
+
+    <div ng-if="problem.output" class="panel panel-primary width_full">
+        <div class="panel-heading">
+            <h1 class="panel-title">输出</h1>
+        </div>
+        <div class=" panel-body pre">{{problem.output}}</div>
+    </div>
+
+    <hr style="width: 100%; border-bottom: #d7d7d7 solid 1px"/>
+
+    <div ng-if="problem.problemType == 0" class="width_full">
+        <h1 class="submit_div_title">是否正确</h1>
+        <select class="form-control" ng-model="answer[radioModel.i].judgeResult">
+            <option value="Y">是</option>
+            <option value="N">否</option>
+        </select>
+    </div>
+
+    <div ng-if="problem.problemType == 1" class="width_full">
+        <h1 class="submit_div_title">正确选项</h1>
+        <select class="form-control" ng-model="answer[radioModel.i].chooseResult"
+                ng-options="o for o in answer[radioModel.i].chooseArray">
+        </select>
+    </div>
+
+    <div ng-if="problem.problemType == 2 || problem.problemType == 3" class="width_full">
+        <h1 class="submit_div_title">正确答案</h1>
+        <div class="input-group margin_bottom_small" ng-repeat="i in answer[radioModel.i].blankArray">
+            <span class="input-group-addon">{{i + 1}}</span>
+            <input type="text" class="form-control" ng-model="answer[radioModel.i].resultArray[i]" placeholder="{{problem.problemType == 2?'请填写空白代码段':'请填写错误代码段'}}">
+        </div>
+    </div>
+
+    <div ng-if="problem.problemType == 4" class="width_full">
+        <h1 class="submit_div_title">完整代码</h1>
+        <textarea class="source_code_div" ng-model="answer[radioModel.i].sourceCode"></textarea>
+    </div>
+
+    <div class="btn-group margin_top">
+        <button class="btn btn-primary" ng-click="submit()">提交</button>
+        <button class="btn btn-default">评测状态</button>
+    </div>
+</div>

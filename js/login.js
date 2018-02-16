@@ -1,5 +1,5 @@
 var login = angular.module('login',['OJ']);
-login.controller('loginCtrl',function ($scope, APIService) {
+login.controller('loginCtrl',function ($scope, APIService, $state) {
     $scope.initData = function () {
         $('#background').css('background','url("./img/landscape.jpg")');
     }
@@ -17,7 +17,7 @@ login.controller('loginCtrl',function ($scope, APIService) {
             if(res.data.http_status == 200){
                 closeloading();
                 layer.msg('登录成功');
-                goto_view('main')
+                $state.go('main')
             }
         });
 

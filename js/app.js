@@ -1,30 +1,52 @@
 "use strict";
-var myapp = angular.module('gP', ['ui.router', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'main', 'login', 'problemList', 'problemDetail', 'addProblem', 'editProblem', 'homeworkList', 'OJ']);
+var myapp = angular.module('gP', ['ui.router', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'editHomework', 'homeworkDetail', 'main', 'login', 'problemList', 'problemDetail', 'addProblem', 'editProblem', 'homeworkList']);
 function config($stateProvider, $urlRouterProvider) {
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'view/login.html'
     }).state('main', {
         url: '/main',
-        templateUrl: 'view/main.html'
+        templateUrl: 'view/main.html',
+        params:{title:'作业系统'}
         // controller: 'mainCtrl'
     }).state('main.problemList', {
         url: '/problemList',
-        templateUrl: 'view/problem/problemList.html'
+        templateUrl: 'view/problem/problemList.html',
+        params:{title:'问题列表'}
     }).state('main.problemDetail', {
         url: '/problemDetail',
-        templateUrl: 'view/problem/problemDetail.html'
+        templateUrl: 'view/problem/problemDetail.html',
+        params:{title:'问题详情'}
     }).state('main.addProblem', {
         url: '/addProblem',
-        templateUrl: 'view/problem/addProblem.html'
+        templateUrl: 'view/problem/addProblem.html',
+        params:{title:'添加问题'}
     }).state('main.editProblem', {
         url: '/editProblem',
         templateUrl: 'view/problem/editProblem.html'
     }).state('main.homeworkList', {
         url: '/homeworkList',
-        templateUrl: 'view/homework/homeworkList.html'
+        templateUrl: 'view/homework/homeworkList.html',
+        params:{title:'作业列表'}
+    }).state('main.homeworkDetail', {
+        url: '/homeworkDetail',
+        templateUrl: 'view/homework/homeworkDetail.html',
+        params:{title:'作业详情'}
+    }).state('main.editHomework', {
+        url: '/editHomework',
+        templateUrl: 'view/homework/editHomework.html'
     })
     $urlRouterProvider.otherwise('/login');
+}
+function con($uibTooltipProvider) {
+    $uibTooltipProvider.options({
+        animation: false,
+        appendToBody: false,
+        placement: 'right',
+        popupCloseDelay: 0,
+        popupDelay: 0,
+    });
+    uibTooltipProvider.setTriggers( { 'openTrigger': 'closeTrigger' } );
 }
 // function run($rootScope, $log) {
 //     $rootScope.$on('$routeChangeSuccess',function(event, current, previous){
@@ -35,12 +57,28 @@ function config($stateProvider, $urlRouterProvider) {
 //         alert('@')
 //     });
 // }
+myapp.config(['$uibTooltipProvider', function (uibTooltipProvider) {
+    uibTooltipProvider.options({
+        animation: false,
+        appendToBody: false,
+        placement: 'right',
+        popupCloseDelay: 0,
+        popupDelay: 0,
+    });
+    uibTooltipProvider.setTriggers( { 'openTrigger': 'closeTrigger' } );
+}])
 myapp.config(config);
-myapp.run((function ($rootScope, $location) {
+myapp.run((function ($rootScope, $location,APIService) {
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
+        APIService.stateChange('a','b');
         console.log(evt, toState, toParams, fromState, fromParams, $location)
     });
 }));
+myapp.filter('homeworkState',function () {
+    return constant.fliter.homeworkState;
+}).filter('toProblemType',function () {
+    return constant.fliter.problemType;
+})
 
 var index;
 function loading() {
@@ -50,9 +88,4 @@ function loading() {
 }
 function closeloading() {
     layer.close(index);
-}
-function goto_view(v) {
-    var baseUrl = window.location.href;
-    baseUrl = (baseUrl.indexOf('#') > 0 ? baseUrl.substr(0, baseUrl.indexOf('#')) : baseUrl);
-    window.location.href = baseUrl + '#!/' + v;
 }

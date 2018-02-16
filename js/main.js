@@ -1,10 +1,10 @@
 "use strict"
 var main = angular.module('main',['OJ']);
-main.controller('mainCtrl',function ($scope, APIService) {
+main.controller('mainCtrl',function ($scope, APIService,$location, $state) {
     $scope.initData = function () {
-        // console.log($scope)
-        $scope.ui()
-        $scope.username = sessionStorage.username;
+        $scope.navbar = {};
+        $scope.nav = sessionStorage.getItem('nav') ? sessionStorage.nav : '';
+        $scope.username = sessionStorage.getItem('username');
         if(sessionStorage.class === null || sessionStorage.class === undefined){
             $scope.class = {};
             $scope.class.name = '请选择班级';
@@ -13,17 +13,18 @@ main.controller('mainCtrl',function ($scope, APIService) {
         }
         $scope.classList = JSON.parse(sessionStorage.classList);
 
-        $scope.content = "完成页面：登录、首页、问题列表、更新问题、添加问题、新建问题"
+        $scope.content = "完成页面：登录、首页、问题列表、更新问题、添加问题、新建问题、" +
+            "作业（考试）列表、作业（考试）详情、作业（考试）编辑"
     }
-    
-    $scope.ui = function () {
-        $('.nav.navbar-nav').eq(0).children().removeClass('active');
+
+    $scope.titleInit = function () {
+        $scope.navbar.title = $state.params.title;
     }
 
     $scope.chooseClass = function (clz) {
         $scope.class = clz;
         sessionStorage.class = JSON.stringify(clz);
-        goto_view('main/problemList');
+        $scope.jump('problem')
     }
 
     $scope.jump = function (word) {
@@ -32,11 +33,17 @@ main.controller('mainCtrl',function ($scope, APIService) {
             return;
         }
         if(word === 'main'){
-            goto_view('main')
+            $scope.nav = '';
+            sessionStorage.nav = '';
+            $state.go('main')
         }else if(word === 'problem'){
-            goto_view('main/problemList')
+            $scope.nav = 'problem';
+            sessionStorage.nav = 'problem';
+            $state.go('main.problemList')
         }else if(word === 'homework'){
-            goto_view('main/homeworkList')
+            $scope.nav = 'homework';
+            sessionStorage.nav = 'homework';
+            $state.go('main.homeworkList')
         }
     }
 })

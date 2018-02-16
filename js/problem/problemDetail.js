@@ -1,6 +1,7 @@
 var problemDetail = angular.module('problemDetail',['OJ']);
 problemDetail.controller('problemDetailCtrl',function ($scope, APIService) {
     $scope.initData = function () {
+        $scope.navbar.title = '问题详情';
         $scope.problem = {
             title:'求平均分',
             description:'在很多比赛中，有多位评委，对选手的表现进行打分。我们规定，选手的得分为去掉最高的和最低的分数后求得的平均分。',

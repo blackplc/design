@@ -1,19 +1,21 @@
 <div ng-controller="editProblemCtrl" class="content_div col-lg-8 col-md-8 col-sm-8 col-xs-12" ng-init="initData()">
-    <h2 class="title_h2">{{pageTitle}}</h2>
+    <!--<h2 class="margin_bottom">{{pageTitle}}</h2>-->
     <div class="form_div">
         <form novalidate name="problemForm" ng-submit="submit()">
             <h4 class="form_items_title">选择题目类型<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.problemType.$invalid && problemForm.submitted">此为必填项</span></h4>
-            <select class="form-control form_items_sm form_items" name="problemType" ng-model="problemType" ng-options="o.name for o in problemTypes" ng-change="changeModel(problemType)" required></select>
+            <select class="form-control form_items_content_selecter form_items_content" name="problemType" ng-model="problemType" ng-options="o.name for o in problemTypes" ng-change="changeModel(problemType)" required></select>
             <h4 class="form_items_title">题目标题<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.title.$invalid && problemForm.submitted">此为必填项</span></h4>
-            <input class="form-control form_items_md form_items" name="title" ng-model="title" required>
+            <input class="form-control form_items_content_input form_items_content" name="title" ng-model="title" required>
             <h4 class="form_items_title">题目描述<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.description.$invalid && problemForm.submitted">此为必填项</span></h4>
-            <textarea class="form-control form_items_textarea form_items" name="description" ng-model="description" required></textarea>
+            <textarea class="form-control form_items_textarea form_items_content" name="description" ng-model="description" required></textarea>
             <h4 class="form_items_title">描述图片</h4>
-            <input id="input-21" type="file" class="form-control form_items_md form_items" accept="image/*" multiple>
+            <div class="form_items_content">
+                <input id="input-21" type="file" class="form-control form_items_md" accept="image/*" multiple>
+            </div>
             <!--判断题-->
             <div ng-if="problemType.no === 1">
                 <h4 class="form_items_title">答案是否正确<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.judge.$invalid">此为必填项</span></h4>
-                <select class="form-control form_items_sm form_items" name="judge" ng-model="judge" ng-change="change(judge)" required>
+                <select class="form-control form_items_content_selecter form_items_content" name="judge" ng-model="judge" ng-change="change(judge)" required>
                     <option value="yes" selected>是</option>
                     <option value="no">否</option>
                 </select>
@@ -23,58 +25,58 @@
             <!--选择题-->
             <div ng-if="problemType.no === 2">
                 <h4 class="form_items_title">选项数量<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.optionAmount.$invalid">此为必填项</span></h4>
-                <select class="form-control form_items_sm form_items" name="optionAmount" ng-model="optionAmount" ng-options="o for o in optionAmounts" ng-change="updateOptionArray(optionAmount)" required></select>
+                <select class="form-control form_items_content_selecter form_items_content" name="optionAmount" ng-model="optionAmount" ng-options="o for o in optionAmounts" ng-change="updateOptionArray(optionAmount)" required></select>
                 <div ng-repeat="i in optionArray">
                     <h4 class="form_items_title">选项{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['optionContent[{{i}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                    <input class="form-control form_items_md form_items" name="optionContent[{{i}}]" ng-model="optionContent[i]" required>
+                    <input class="form-control form_items_content_md form_items_content" name="optionContent[{{i}}]" ng-model="optionContent[i]" required>
                 </div>
                 <h4 class="form_items_title">正确选项<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.rightOption.$invalid && problemForm.submitted">此为必填项</span></h4>
-                <select class="form-control form_items_sm form_items" name="rightOption" ng-model="rightOption" ng-options="o for o in optionArray" ng-change="change(judge)" required></select>
+                <select class="form-control form_items_content_selecter form_items_content" name="rightOption" ng-model="rightOption" ng-options="o for o in optionArray" ng-change="change(judge)" required></select>
             </div>
             <!--选择题-->
 
             <!--填空题-->
             <div ng-if="problemType.no === 3">
                 <h4 class="form_items_title">填空数量<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.blankAmount.$invalid">此为必填项</span></h4>
-                <select class="form-control form_items_sm form_items" name="blankAmount" ng-model="blankAmount" ng-options="o for o in blankAmounts" ng-change="updateBlankArray(blankAmount)" required></select>
+                <select class="form-control form_items_content_selecter form_items_content" name="blankAmount" ng-model="blankAmount" ng-options="o for o in blankAmounts" ng-change="updateBlankArray(blankAmount)" required></select>
                 <div ng-repeat="i in blankArray">
-                    <h4 class="form_items_title">代码段{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['codeContent[{{i}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                    <textarea class="form-control form_items_textarea textarea_md form_items" name="codeContent[{{i}}]" ng-model="codeContent[i]" required></textarea>
+                    <h4 class="form_items_title">代码段{{i + 1}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['codeContent[{{i + 1}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
+                    <textarea class="form-control form_items_textarea textarea_md form_items_content" name="codeContent[{{i + 1}}]" ng-model="codeContent[i]" required></textarea>
 
-                    <h4 class="form_items_title">填空段{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['blankContent[{{i}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                    <textarea class="form-control form_items_textarea textarea_sm form_items" name="blankContent[{{i}}]" ng-model="blankContent[i]" required></textarea>
+                    <h4 class="form_items_title">填空段{{i + 1}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['blankContent[{{i + 1}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
+                    <textarea class="form-control form_items_textarea textarea_sm form_items_content" name="blankContent[{{i + 1}}]" ng-model="blankContent[i]" required></textarea>
                 </div>
                 <h4 class="form_items_title">代码段{{blankAmount + 1}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['codeContent[{{blankAmount + 1}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                <textarea class="form-control form_items_textarea textarea_md form_items" name="codeContent[{{blankAmount + 1}}]" ng-model="codeContent[blankAmount + 1]" required></textarea>
+                <textarea class="form-control form_items_textarea textarea_md form_items_content" name="codeContent[{{blankAmount + 1}}]" ng-model="codeContent[blankAmount + 1]" required></textarea>
             </div>
             <!--填空题-->
 
             <!--改错题-->
             <div ng-if="problemType.no === 4">
                 <h4 class="form_items_title">错误数量<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.errorAmount.$invalid">此为必填项</span></h4>
-                <select class="form-control form_items_sm form_items" name="errorAmount" ng-model="errorAmount" ng-options="o for o in errorAmounts" ng-change="updateErrorArray(errorAmount)" required></select>
+                <select class="form-control form_items_content_selecter form_items_content" name="errorAmount" ng-model="errorAmount" ng-options="o for o in errorAmounts" ng-change="updateErrorArray(errorAmount)" required></select>
                 <div ng-repeat="i in errorArray">
-                    <h4 class="form_items_title">代码段{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['codeContent[{{i}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                    <textarea class="form-control form_items_textarea textarea_md form_items" name="codeContent[{{i}}]" ng-model="codeContent[i]" required></textarea>
+                    <h4 class="form_items_title">代码段{{i + 1}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['codeContent[{{i + 1}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
+                    <textarea class="form-control form_items_textarea textarea_md form_items_content" name="codeContent[{{i + 1}}]" ng-model="codeContent[i]" required></textarea>
 
-                    <h4 class="form_items_title">错误段{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['errorContent[{{i}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                    <textarea class="form-control form_items_textarea textarea_sm form_items" name="errorContent[{{i}}]" ng-model="errorContent[i]" required></textarea>
+                    <h4 class="form_items_title">错误段{{i + 1}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['errorContent[{{i + 1}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
+                    <textarea class="form-control form_items_textarea textarea_sm form_items_content" name="errorContent[{{i + 1}}]" ng-model="errorContent[i]" required></textarea>
 
-                    <h4 class="form_items_title">正确段{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['rightContent[{{i}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                    <textarea class="form-control form_items_textarea textarea_sm form_items" name="rightContent[{{i}}]" ng-model="rightContent[i]" required></textarea>
+                    <h4 class="form_items_title">正确段{{i + 1}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['rightContent[{{i + 1}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
+                    <textarea class="form-control form_items_textarea textarea_sm form_items_content" name="rightContent[{{i + 1}}]" ng-model="rightContent[i]" required></textarea>
                 </div>
                 <h4 class="form_items_title">代码段{{errorAmount + 1}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['codeContent[{{errorAmount + 1}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                <textarea class="form-control form_items_textarea textarea_md form_items" name="codeContent[{{errorAmount + 1}}]" ng-model="codeContent[errorAmount + 1]" required></textarea>
+                <textarea class="form-control form_items_textarea textarea_md form_items_content" name="codeContent[{{errorAmount + 1}}]" ng-model="codeContent[errorAmount + 1]" required></textarea>
             </div>
             <!--改错题-->
             
             <!--编程题-->
-            <div ng-if="problemType.no === 5">
+            <div ng-if="problemType.no === 5" >
                 <h4 class="form_items_title">输入描述<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.inputDes.$invalid && problemForm.submitted">此为必填项</span></h4>
-                <textarea class="form-control form_items_textarea textarea_sm form_items" name="inputDes" ng-model="inputDes" required></textarea>
+                <textarea class="form-control form_items_textarea textarea_sm form_items_content" name="inputDes" ng-model="inputDes" required></textarea>
 
                 <h4 class="form_items_title">输出描述<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.outputDes.$invalid && problemForm.submitted">此为必填项</span></h4>
-                <textarea class="form-control form_items_textarea textarea_sm form_items" name="outputDes" ng-model="outputDes" required></textarea>
+                <textarea class="form-control form_items_textarea textarea_sm form_items_content" name="outputDes" ng-model="outputDes" required></textarea>
             </div>
             <!--编程题-->
 

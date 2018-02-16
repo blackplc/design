@@ -1,6 +1,6 @@
-var OJ = angular.module("OJ",[]);
-OJ.factory('APIService',function ($http) {
-    var service = {
+let OJ = angular.module("OJ", []);
+OJ.factory('APIService', function ($http) {
+    let service = {
         token: sessionStorage.token,
         userId: sessionStorage.userId
     }
@@ -57,14 +57,18 @@ OJ.factory('APIService',function ($http) {
             }
         })
     };
+    service.stateChange = function (fromState, toState) {
+        console.log(arguments);
+        // return service.get(constant.localUrl + '/state/stateChange?' +)
+    }
     service.login = function (username, password) {
-        var res = {};
-        var classList = [{
-            name:'c语言',
-            id:123456
-        },{
-            name:'d',
-            id:654321
+        let res = {};
+        let classList = [{
+            name: 'c语言',
+            id: 123456
+        }, {
+            name: 'd',
+            id: 654321
         }]
         sessionStorage.username = username;
         sessionStorage.classList = JSON.stringify(classList);

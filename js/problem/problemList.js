@@ -1,16 +1,10 @@
 "use strict"
 var problemList = angular.module('problemList',['OJ']);
-problemList.controller('problemListCtrl',function ($scope, $stateParams,APIService) {
+problemList.controller('problemListCtrl',function ($scope, $stateParams,APIService,$location,$state) {
     $scope.initData = function () {
-        $scope.title = JSON.parse(sessionStorage.class).name + "问题列表";
-        // $('.nav.navbar-nav').eq(0).children().removeClass('active');
-        $('.nav.navbar-nav').eq(0).children().eq(0).addClass('active');
+        $scope.navbar.title = "问题列表";
         $scope.userType = 1;
         $scope.hide = 1;
-        if(sessionStorage.class == null){
-            layer.msg('请先选择班级！')
-            history.back();
-        }
         $scope.$parent.$parent.class = JSON.parse(sessionStorage.class);
         var p1 = function () {
             return {
@@ -21,9 +15,9 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
                 passAmount:Math.ceil(Math.random()*20),
                 problemType:5,
                 submitState:1,
-                hide:1
+                hide:0
             }
-        };  // 13.83    28.4     2.43    1.41
+        };
         var p2 = {
             problemId:2,
             title:'abdc',
@@ -32,7 +26,7 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
             passAmount:15,
             problemType:5,
             submitState:3,
-            hide:0
+            hide:1
         };
         var p3 = {
             problemId:3,
@@ -42,7 +36,7 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
             passAmount:22,
             problemType:5,
             submitState:2,
-            hide:1
+            hide:0
         }
         $scope.problemList= [];
         $scope.problemList.push(new p1());
@@ -70,7 +64,7 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
             class:$scope.$parent.$parent.class.name
         }
         sessionStorage.props = JSON.stringify(p);
-        goto_view('main/addProblem');
+        $state.go('main.addProblem');
     }
     
     $scope.change = function () {
@@ -78,17 +72,33 @@ problemList.controller('problemListCtrl',function ($scope, $stateParams,APIServi
     }
 
     $scope.click = function (obj) {
-        console.log(obj)
-        goto_view('main/problemDetail')
+        $state.go('main.problemDetail')
     }
 
-    $scope.update = function (obj, $event) {
+    $scope.updateProblem = function (obj, $event) {
+        $event.stopPropagation();
         sessionStorage.editProblemParam = JSON.stringify({
             type:'update',
             problem:obj
         });
-        goto_view('main/editProblem');
+        $state.go('main.editProblem');
+    }
+
+    $scope.deleteProblem = function (obj, $event) {
         $event.stopPropagation();
+        layer.confirm('确定删除'+obj.title+'？', {
+            btn: ['确定','取消'], //按钮
+            icon:0
+        }, function(){
+            // APIService 删除题目
+            layer.closeAll()
+            layer.msg('删除成功',{icon:1})
+            setTimeout(function() {
+                location.reload();
+            }, 500);
+        }, function(){
+            layer.closeAll()
+        });
     }
 
     $scope.toggle = function (obj, $event) {

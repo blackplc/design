@@ -1,12 +1,12 @@
 'use strict';
 var addProblem = angular.module('addProblem', ['OJ']);
-addProblem.controller('addProblemCtrl', function ($scope, APIService, $sce) {
+addProblem.controller('addProblemCtrl', function ($scope, APIService, $state, $location) {
 
     $scope.initData = function () {
         $scope.userType = 1;
         $scope.problemSet = new Set();
         var props = JSON.parse(sessionStorage.props);
-        $scope.title = '添加问题到' + props.class + '的' + (props.from === 'problemList' ? '问题列表' : props.from === 'homework' ? '第' + props.times + '次作业' : '考试');
+        $scope.navbar.title = '添加问题';
         var id = 1;
         var p1 = function () {
             return {
@@ -66,7 +66,7 @@ addProblem.controller('addProblemCtrl', function ($scope, APIService, $sce) {
         sessionStorage.editProblemParam = JSON.stringify({
             type: 'new'
         });
-        goto_view('main/editProblem');
+        $state.go('main.editProblem');
     }
 
     $scope.todoSomething = function (event) {
@@ -83,13 +83,30 @@ addProblem.controller('addProblemCtrl', function ($scope, APIService, $sce) {
         }
     }
 
-    $scope.update = function (obj, $event) {
+    $scope.updateProblem = function (obj, $event) {
+        $event.stopPropagation();
         sessionStorage.editProblemParam = JSON.stringify({
             type:'update',
             problem:obj
         });
-        goto_view('main/editProblem');
+        $state.go('main.editProblem');
+    }
+
+    $scope.deleteProblem = function (obj, $event) {
         $event.stopPropagation();
+        layer.confirm('确定删除'+obj.title+'？', {
+            btn: ['确定','取消'], //按钮
+            icon:0
+        }, function(){
+            // APIService 删除题目
+            layer.closeAll()
+            layer.msg('删除成功',{icon:1})
+            setTimeout(function() {
+                location.reload();
+            }, 500);
+        }, function(){
+            layer.closeAll()
+        });
     }
 
     $scope.contain = function (problemId) {
@@ -102,6 +119,7 @@ addProblem.controller('addProblemCtrl', function ($scope, APIService, $sce) {
 
     $scope.submit = function () {
         var problemArray = Array.from($scope.problemSet);
-        console.log(problemArray, typeof problemArray, $scope.problemList)
+        console.log(problemArray, typeof problemArray, $scope.problemList,$location)
+        history.back()
     }
 })

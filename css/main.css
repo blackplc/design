@@ -31,6 +31,10 @@ a {
     /*width: 55%;*/
 }
 
+.margin_vertical {
+    margin: 20px 0;
+}
+
 .main_wraper {
     margin-top: 51px;
     width: 100%;
@@ -56,6 +60,12 @@ a {
     border-radius: 4px;
 }
 
+.text_overflow{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .content_wraper {
     /*flex: 1 0 auto;*/
     display: flex;
@@ -69,12 +79,18 @@ a {
     display: flex;
     justify-content: center;
     width: 100%;
-    flex:1 0 auto;
+    flex: 1 0 auto;
     /*position: ;*/
 }
 
-button {
-    outline: none;
+.problem_container {
+    background: #f5f5f5;
+    width: 100%;
+    border: 1px solid #b0b0b0;
+}
+
+.problem_btn_group {
+    margin: 10px 0px;
 }
 
 .maincontent {
@@ -119,23 +135,54 @@ button {
     width: calc(100% - 3vw);
 }
 
-.title_h2 {
+.margin_top {
+    margin-top: 20px;
+}
+
+.margin_bottom {
     margin-bottom: 20px;
+}
+
+.margin_bottom_small{
+    margin-bottom: 15px;
 }
 
 .toolbar {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    justify-content: flex-start;
+    margin-top: 20px;
+    padding:10px;
     flex: 0 0 auto;
     width: 100%;
+    background: #f6f6f6;
+}
+.toolbar > button{
+    margin: 0 20px;
+}
+.source_code_div {
+    width: 100%;
+    height: 400px;
+    resize: none;
+    border-radius: 3px
+}
+
+.shadow_bottom{
+    box-shadow: 0 2px 6px #e9e9e9;
+}
+
+.table_div{
+    width: 100%;
+    margin-top: 40px;
+    box-shadow: 1px 1px 4px #e9e9e9;
 }
 
 .form_div {
     position: relative;
     border: 1px solid #b0b0b0;
     border-radius: 10px;
+    box-shadow: 3px 3px 4px #e9e9e9;
+    margin-top: 40px;
     width: 100%;
     min-height: 500px;
     display: table;
@@ -148,8 +195,7 @@ button {
     justify-content: flex-end;
     margin-top: 15px;
 }
-
-.form_items {
+.form_items_content{
     margin: 0 30px;
     flex: 0 0 auto;
 }
@@ -160,11 +206,19 @@ button {
     border-bottom: 1px solid #b0b0b0;
 }
 
-.form_items_sm {
+.form_items_content_selecter{
+    width: 150px;
+}
+
+.form_items_content_input{
+    width: 200px;
+}
+
+.form_items_content_sm {
     width: 20%;
 }
 
-.form_items_md {
+.form_items_content_md {
     width: 40%;
 }
 
@@ -172,6 +226,16 @@ button {
     resize: none;
     width: calc(100% - 60px);
     height: 300px;
+}
+
+.time_picker_div{
+    display: flex;
+    align-items: center;
+}
+
+.submit_div_title {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .textarea_sm {
@@ -200,6 +264,10 @@ button {
     background: #f1ffed;
 }
 
-.problem_detail_div {
+.width_full {
     width: 100%;
+}
+
+.margin_RL{
+    margin: 0 15px;
 }

@@ -38,16 +38,6 @@ function config($stateProvider, $urlRouterProvider) {
     })
     $urlRouterProvider.otherwise('/login');
 }
-function con($uibTooltipProvider) {
-    $uibTooltipProvider.options({
-        animation: false,
-        appendToBody: false,
-        placement: 'right',
-        popupCloseDelay: 0,
-        popupDelay: 0,
-    });
-    uibTooltipProvider.setTriggers( { 'openTrigger': 'closeTrigger' } );
-}
 // function run($rootScope, $log) {
 //     $rootScope.$on('$routeChangeSuccess',function(event, current, previous){
 //         alert('!');
@@ -57,20 +47,12 @@ function con($uibTooltipProvider) {
 //         alert('@')
 //     });
 // }
-myapp.config(['$uibTooltipProvider', function (uibTooltipProvider) {
-    uibTooltipProvider.options({
-        animation: false,
-        appendToBody: false,
-        placement: 'right',
-        popupCloseDelay: 0,
-        popupDelay: 0,
-    });
-    uibTooltipProvider.setTriggers( { 'openTrigger': 'closeTrigger' } );
-}])
 myapp.config(config);
 myapp.run((function ($rootScope, $location,APIService) {
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
-        APIService.stateChange('a','b');
+        if(toState.name !== 'login'){
+            console.log(APIService.stateChange(fromState.name, toState.name));
+        }
         console.log(evt, toState, toParams, fromState, fromParams, $location)
     });
 }));

@@ -14,7 +14,7 @@ login.controller('loginCtrl',function ($scope, APIService, $state) {
         }
         loading();
         APIService.login($scope.username,$scope.password).then(function (res) {
-            if(res.data.http_status == 200){
+            if(res.data.httpStatus === 200) {
                 closeloading();
                 layer.msg('登录成功');
                 $state.go('main')

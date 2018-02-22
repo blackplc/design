@@ -4,7 +4,9 @@ editHomework.controller('editHomeworkCtrl', function ($scope, $stateParams, APIS
 
     $scope.initData = function () {
         $scope.param = JSON.parse(sessionStorage.editHomeworkParam);
-
+        APIService.stateChange('aaa', 'bbb').then(function (data) {
+            console.log(data,data.headers('Content-Type'));
+        })
         $scope.start = {};
         $scope.start.open = false;
         $scope.end = {};

@@ -3,7 +3,34 @@ let constant = function () {
     let constant = {};
     constant.fliter = {};
 
-    constant.localUrl = 'localhost:8080/';
+    constant.baseUrl = '/graduationProject';
+    // constant.picUploadUrl = '/problemDic/newPicture';
+
+    constant.goto_view = function (v) {
+        let baseUrl = window.location.href;
+        //window.location.reload();
+        baseUrl = (baseUrl.indexOf('#') > 0 ? baseUrl.substr(0, baseUrl.indexOf('#')) : baseUrl);
+        window.location.href = baseUrl + "#!/" + v;
+        return { 'a': 1, b: 2 };
+    }
+
+    constant.problemTemplate = function () {
+        return {
+            title:null,
+            problemType:null,
+            courseNo:null,
+            type:null,
+            description:null,
+            standardAnswer:null,
+            rightOption:null,
+            pictureList:null,
+            blankAmount:null,
+            codeContent:null,
+            errorContent:null,
+            inputDes:null,
+            outputDes:null
+        }
+    }
 
     constant.judgeProblemModal = function () {
         return {
@@ -112,6 +139,12 @@ let constant = function () {
         return [0, 1, 2, 3, 4, 5, 6].slice(0,num);
     }
 
+    constant.back = function () {
+        setTimeout(function() {
+            history.back();
+        }, 500);
+    }
+
     constant.fliter.homeworkState = function (num) {
         if(num === 0){
             return '未开始';
@@ -123,7 +156,7 @@ let constant = function () {
     }
     constant.fliter.problemType = function (num) {
         for(let i in constant.problemTypes){
-            if(i == num){
+            if(i === num){
                 return constant.problemTypes[i].name;
             }
         }

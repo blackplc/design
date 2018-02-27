@@ -1,8 +1,11 @@
 "use strict";
-var myapp = angular.module('gP', ['ui.router', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'editHomework', 'homeworkDetail', 'main', 'login', 'problemList', 'problemDetail', 'addProblem', 'editProblem', 'homeworkList']);
-function config($stateProvider, $urlRouterProvider) {
+var myapp = angular.module('gP', ['ui.router', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'editHomework', 'homeworkDetail', 'main', 'problemList', 'problemDetail', 'addProblem', 'editProblem', 'homeworkList']);
+myapp.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+// $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.when('', '/login').otherwise('/login');
     $stateProvider.state('login', {
         url: '/login',
+        controller:'loginCtrl',
         templateUrl: 'view/login.html'
     }).state('main', {
         url: '/main',
@@ -36,18 +39,7 @@ function config($stateProvider, $urlRouterProvider) {
         url: '/editHomework',
         templateUrl: 'view/homework/editHomework.html'
     })
-    $urlRouterProvider.otherwise('/login');
-}
-// function run($rootScope, $log) {
-//     $rootScope.$on('$routeChangeSuccess',function(event, current, previous){
-//         alert('!');
-//     });
-//
-//     $rootScope.$on('$routeChangeError', function(event, current, previous, rejection){
-//         alert('@')
-//     });
-// }
-myapp.config(config);
+}])
 myapp.run((function ($rootScope, $location,APIService) {
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
         if(toState.name !== 'login'){

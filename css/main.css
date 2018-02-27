@@ -28,7 +28,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*width: 55%;*/
+    width: 100%;
 }
 
 .margin_vertical {
@@ -80,7 +80,7 @@ a {
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    width: 100%;
+    /*width: 100%;*/
     flex: 1 0 auto;
     /*position: ;*/
 }
@@ -141,6 +141,14 @@ a {
     margin-top: 20px;
 }
 
+.min_width_10{
+    min-width: 10vw;
+}
+
+.margin_top_sm {
+    margin-top: 10px;
+}
+
 .margin_bottom {
     margin-bottom: 20px;
 }
@@ -151,7 +159,7 @@ a {
 
 .toolbar {
     display: flex;
-    flex-wrap: wrap;
+    /*flex-direction: column;*/
     justify-content: flex-start;
     margin-top: 20px;
     padding:10px;
@@ -159,8 +167,13 @@ a {
     width: 100%;
     background: #f6f6f6;
 }
-.toolbar > button{
-    margin: 0 20px;
+.flex_column{
+    flex-direction: column;
+}
+.toolbar_row{
+    display: flex;
+    justify-content: space-around;
+
 }
 .source_code_div {
     width: 100%;
@@ -213,7 +226,7 @@ a {
 }
 
 .form_items_content_input{
-    width: 200px;
+    width: 250px;
 }
 
 .form_items_content_sm {
@@ -242,6 +255,10 @@ a {
 
 .textarea_sm {
     height: 70px;
+}
+
+.color_green{
+    color: green;
 }
 
 .textarea_md {

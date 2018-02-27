@@ -1,4 +1,4 @@
-var problemDetail = angular.module('problemDetail',['OJ']);
+var problemDetail = angular.module('problemDetail',[]);
 problemDetail.controller('problemDetailCtrl',function ($scope, APIService) {
     $scope.initData = function () {
         $scope.navbar.title = '问题详情';

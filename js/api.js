@@ -1,5 +1,5 @@
-let OJ = angular.module("OJ", []);
-OJ.factory('APIService', function ($http) {
+"use strict"
+myapp.factory('APIService',['$http', function ($http) {
     let service = {
         token: sessionStorage.getItem('token'),
         userId: sessionStorage.getItem('userId')
@@ -57,16 +57,25 @@ OJ.factory('APIService', function ($http) {
             }
         })
     };
+    service.getPictureList = function (pictureIds) {
+        return service.get(constant.baseUrl + constant.picture + '/getPictureList?pictureIds='+pictureIds);
+    }
+    service.getProblemDicList = function (category, courseNo, keyword,offset) {
+        return service.get(constant.baseUrl + constant.problemDic + '/problemList?category='+category+'&courseNo='+courseNo+'&keyword='+keyword+'&$offset='+offset+'&$pageSize='+constant.pageSize);
+    }
+    service.getCategoryList = function () {
+        return service.get(constant.baseUrl + constant.problemDic + '/categoryList');
+    }
     service.pictureUpload = function (picObj) {
         return $http({
-            url: constant.baseUrl+'/problemDic/newPicture',
+            url: constant.baseUrl + constant.problemDic + '/newPicture',
             method: 'POST',
             headers: {
                 'Content-Type': undefined,
                 "request-token": service.token,
                 "user-id": service.userId
             },
-            transformRequest: function() {
+            transformRequest: function () {
                 return picObj;
             }
         })
@@ -89,24 +98,30 @@ OJ.factory('APIService', function ($http) {
 
         // return service.post(constant.baseUrl+constant.picUploadUrl,picObj);
     }
+    service.getProblemDic = function (id) {
+        return service.get(constant.baseUrl +constant.problemDic +'/problemDic?problemId='+id);
+    }
     service.newProblemDic = function (data) {
-        return service.post(constant.baseUrl+'/problemDic/newProblemDic',data);
+        return service.post(constant.baseUrl + constant.problemDic + '/newProblemDic', data);
+    }
+    service.updateProblemDic = function (data) {
+        return service.post(constant.baseUrl + constant.problemDic + '/updateProblemDic', data);
     }
     service.stateChange = function (fromState, toState) {
         console.log(service.token, service.userId);
-        return service.get(constant.baseUrl + '/track/stateChange?fromState='+fromState+'&toState='+toState,);
+        return service.get(constant.baseUrl + '/track/stateChange?fromState=' + fromState + '&toState=' + toState,);
     }
     service.login = function (username, password) {
         // var password = hex_md5(password);
         var data = {
             password: password,
-            userName:username
+            userName: username
         };
-        return $http.post(constant.baseUrl + '/user/login',data).then(function (res) {
-            if (res.data.httpStatus === 200) {
+        return $http.post(constant.baseUrl + '/user/login', data).then(function (res) {
+            if (res.data != null) {
                 service.userId = res.data.user.id;
                 service.token = res.data.token;
-                sessionStorage.userId =  res.data.user.id;
+                sessionStorage.userId = res.data.user.id;
                 sessionStorage.token = res.data.token;
 
                 let classList = [{
@@ -123,8 +138,8 @@ OJ.factory('APIService', function ($http) {
         })
     }
     return service;
-})
-OJ.config(function($httpProvider) {
+}])
+myapp.config(function($httpProvider) {
     // $httpProvider.defaults.headers.common = {
     //     "Content-Type": 'application/json'
     // };

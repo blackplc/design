@@ -1,5 +1,5 @@
 "use strict"
-var problemList = angular.module('problemList',['OJ']);
+var problemList = angular.module('problemList',[]);
 problemList.controller('problemListCtrl',function ($scope, $stateParams,APIService,$location,$state) {
     $scope.initData = function () {
         $scope.navbar.title = "问题列表";

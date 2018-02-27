@@ -1,5 +1,5 @@
 "use strict"
-let editHomework = angular.module('editHomework', ['OJ']);
+let editHomework = angular.module('editHomework', []);
 editHomework.controller('editHomeworkCtrl', function ($scope, $stateParams, APIService, $location, $state) {
 
     $scope.initData = function () {

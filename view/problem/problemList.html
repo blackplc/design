@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="a in problemList" ng-if="userType || !a.hide" ng-click="click(a)" class="pointer">
-                <td><span ng-class="{'glyphicon-remove':a.submitState==2,'glyphicon-ok':a.submitState==1}" class="glyphicon"></span></td>
+                <td><span ng-class="{'glyphicon-remove':a.submitState==2,'glyphicon-ok color_green':a.submitState==1}" class="glyphicon"></span></td>
                 <td>{{$index + 1}} </td>
                 <td>{{a.title}}</td>
                 <td>{{a.totalSunmit}}</td>

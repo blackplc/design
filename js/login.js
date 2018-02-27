@@ -1,5 +1,4 @@
-var login = angular.module('login',['OJ']);
-login.controller('loginCtrl',function ($scope, APIService, $state) {
+myapp.controller('loginCtrl',['$scope','APIService','$state',function ($scope, APIService, $state) {
     $scope.initData = function () {
         $('#background').css('background','url("./img/landscape.jpg")');
     }
@@ -14,9 +13,10 @@ login.controller('loginCtrl',function ($scope, APIService, $state) {
         }
         loading();
         APIService.login($scope.username,$scope.password).then(function (res) {
-            if(res.data.httpStatus === 200) {
+            if(res.data != null) {
                 closeloading();
                 layer.msg('登录成功');
+                sessionStorage.nav = '';
                 $state.go('main')
             }
         });
@@ -31,4 +31,4 @@ login.controller('loginCtrl',function ($scope, APIService, $state) {
         }
         return true;
     }
-})
+}])

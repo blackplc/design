@@ -1,5 +1,5 @@
 "use strict"
-let homeworkDetail = angular.module('homeworkDetail', ['OJ']);
+let homeworkDetail = angular.module('homeworkDetail', []);
 homeworkDetail.controller('homeworkDetailCtrl', function ($scope, $stateParams, APIService, $location, $state, $interval) {
     $scope.initData = function () {
         let index = 1;

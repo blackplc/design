@@ -1,27 +1,61 @@
 <div ng-controller="addProblemCtrl" class="content_div col-lg-8 col-md-8 col-sm-8 col-xs-12" ng-init="initData()">
-    <!--<h2 class="margin_bottom">{{title}}</h2>-->
-    <div class="toolbar">
-        <button class="btn btn-primary btn-sm margin_RL" ng-click="newProblem()"><span class="glyphicon glyphicon-plus"></span>新建问题</button>
-        <div class="input-group input-group-sm margin_RL" style="width: calc(100% - 300px )">
-            <input type="text" class="form-control" ng-keypress="todoSomething($event)" ng-model="keyword" placeholder="请输入关键词">
-            <span class="input-group-btn "><button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span>搜索</button></span>
+    <div class="toolbar flex_column">
+        <div class="toolbar_row">
+            <button class="btn btn-primary btn-sm min_width_10" ng-click="newProblem()"><span class="glyphicon glyphicon-plus"></span> 新建问题</button>
+
+            <div class="btn-group" >
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle min_width_10" data-toggle="dropdown">
+                    {{category}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="min-width: 100%">
+                    <li ng-click="bindingCategory('分类')"><a>所有</a></li>
+                    <li ng-repeat="a in categoryList" ng-click="bindingCategory(a)"><a>{{a}}</a></li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle min_width_10" data-toggle="dropdown">
+                    {{course.name}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="min-width: 100%">
+                    <li ng-click="bindingCourseList()"><a>所有</a></li>
+                    <li ng-repeat="a in courseList" ng-click="bindingCourseList(a)"><a>{{a.name}}</a></li>
+                </ul>
+            </div>
+
+            <button class="btn btn-success btn-sm min_width_10" ng-click="submit()"><span class="glyphicon glyphicon-ok"></span> 确认添加</button>
+
         </div>
-        <button class="btn btn-success btn-sm margin_RL" ng-click="submit()">确认添加</button>
+
+        <div class="col-md-12 margin_top_sm">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" ng-keypress="todoSomething($event)" ng-model="keyword" placeholder="请输入关键词">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="getProblemDicList()"><span class="glyphicon glyphicon-search"></span>搜索</button>
+                </span>
+            </div>
+        </div>
     </div>
+
     <table class="table_div table table-hover table-striped">
         <thead>
             <tr>
-                <th class="col-xs-1 col-sm-1"></th>
-                <th class="col-xs-2 col-sm-2">编号</th>
-                <th class="col-xs-6 col-sm-6">标题</th>
+                <th class="col-xs-1 col-sm-1">&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th class="col-xs-1 col-sm-1">编号</th>
+                <th class="col-xs-5 col-sm-5">标题</th>
+                <th class="col-xs-1 col-sm-1">分类</th>
+                <th class="col-xs-1 col-sm-1">类型</th>
+                <!--<th class="col-xs-1 col-sm-1">课程</th>-->
                 <th class="col-xs-3 col-sm-3" ng-if="userType">操作</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="a in problemList" ng-if="userType || a.hide" ng-click="check(a.problemId)" ng-class="{'green':contain(a.problemId)}" class="pointer" uib-popover-template="'template.html'" popover-title="问题描述" popover-trigger="'mouseenter'" popover-placement="top">
-                <td><span ng-class="{'glyphicon-ok':contain(a.problemId)}" class="glyphicon"></span></td>
-                <td>{{a.problemId}} </td>
+            <tr ng-repeat="a in problemList" ng-if="userType || a.hide" ng-click="check(a.id)" ng-class="{'green':contain(a.id)}" class="pointer" uib-popover-template="'template.html'" popover-title="问题描述" popover-trigger="'mouseenter'" popover-placement="top">
+                <td><span ng-class="{'glyphicon-ok color_green':contain(a.id)}" class="glyphicon" style="font-size: small"></span></td>
+                <td>{{a.id}} </td>
                 <td>{{a.title}}</td>
+                <td>{{a.category}}</td>
+                <td>{{a.problemType | toProblemType | limitTo :1}}</td>
                 <td ng-if="userType">
                     <button class="btn btn-sm btn-primary" ng-click="updateProblem(a,$event)"><span class="glyphicon glyphicon-pencil"></span>修改</button>
                     <button class="btn btn-sm btn-primary" ng-click="deleteProblem(a,$event)"><span class="glyphicon glyphicon-trash"></span>删除</button>
@@ -29,8 +63,8 @@
             </tr>
         </tbody>
     </table>
-    <ul  uib-pagination total-items="40" ng-model="cur" ng-change="change()" items-per-page="15"
-         previous-text="<" next-text=">" max-size="5"></ul>
+    <ul  uib-pagination total-items=totalSize ng-model="cur" ng-change="page(cur)" items-per-page=pageSize
+         previous-text="<" next-text=">" max-size="3" boundary-link-numbers="true"  rotate="true"> </ul>
     <script id="template.html" type="text/ng-template">
         <div class="pre">{{a.description}}</div>
     </script>

@@ -1,5 +1,5 @@
 "use strict"
-var main = angular.module('main',['OJ']);
+var main = angular.module('main',[]);
 main.controller('mainCtrl',function ($scope, APIService,$location, $state) {
     $scope.initData = function () {
         $scope.navbar = {};
@@ -13,7 +13,7 @@ main.controller('mainCtrl',function ($scope, APIService,$location, $state) {
         }
         $scope.classList = JSON.parse(sessionStorage.classList);
 
-        $scope.content = "完成页面：登录{API}、首页、问题列表、更新问题、添加问题、新建问题{API}、" +
+        $scope.content = "完成页面：登录{API}、首页、问题列表、更新问题{API}、添加问题、新建问题{API}、" +
             "作业（考试）列表、作业（考试）详情、作业（考试）编辑"
     }
 

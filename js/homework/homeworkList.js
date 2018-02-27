@@ -1,5 +1,5 @@
 "use strict"
-var homeworkList = angular.module('homeworkList', ['OJ']);
+var homeworkList = angular.module('homeworkList', []);
 homeworkList.controller('homeworkListCtrl', function ($scope, APIService, $state) {
     $scope.initData = function () {
         $scope.navbar.title = '作业列表'

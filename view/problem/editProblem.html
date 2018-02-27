@@ -4,14 +4,35 @@
         <form novalidate name="problemForm" ng-submit="submit()">
             <h4 class="form_items_title">选择题目类型<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.problemType.$invalid && problemForm.submitted">此为必填项</span></h4>
             <select class="form-control form_items_content_selecter form_items_content" name="problemType" ng-model="problemType" ng-options="o.no as o.name for o in problemTypes" ng-change="changeModel(problemType)" required></select>
+
+            <h4 class="form_items_title">选择题目归属课程<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.course.$invalid && problemForm.submitted">此为必填项</span></h4>
+            <select class="form-control form_items_content_selecter form_items_content" name="course" ng-model="course" ng-options="o.no as o.name for o in courseList" required></select>
+
+            <h4 class="form_items_title">选择题目分类<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.category.$invalid && problemForm.submitted">此为必填项</span></h4>
+            <div class="form_items_content_input form_items_content input-group">
+                <input type="text" class="form-control" name="category" ng-model="category" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        选择分类
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="a in categoryList" ng-click="bindingCategory(a)"><a>{{a}}</a></li>
+                    </ul>
+                </div><!-- /btn-group -->
+            </div>
+
             <h4 class="form_items_title">题目标题<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.title.$invalid && problemForm.submitted">此为必填项</span></h4>
             <input class="form-control form_items_content_input form_items_content" name="title" ng-model="title" required>
+
             <h4 class="form_items_title">题目描述<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.description.$invalid && problemForm.submitted">此为必填项</span></h4>
             <textarea class="form-control form_items_textarea form_items_content" name="description" ng-model="description" required></textarea>
+
             <h4 class="form_items_title">描述图片</h4>
             <div class="form_items_content">
                 <input id="input-21" type="file" name="file" class="form-control form_items_md" accept="image/*" multiple>
             </div>
+
             <!--判断题-->
             <div ng-if="problemType === 1">
                 <h4 class="form_items_title">答案是否正确<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.judge.$invalid">此为必填项</span></h4>
@@ -24,8 +45,8 @@
                 <h4 class="form_items_title">选项数量<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.optionAmount.$invalid">此为必填项</span></h4>
                 <select class="form-control form_items_content_selecter form_items_content" name="optionAmount" ng-model="problem.optionAmount" ng-options="o for o in optionAmounts" ng-change="updateOptionArray(problem.optionAmount)" required></select>
                 <div ng-repeat="i in optionArray">
-                    <h4 class="form_items_title">选项{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['optionContent[{{i}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
-                    <input class="form-control form_items_content_md form_items_content" name="optionContent[{{i}}]" ng-model="optionContent[i]" required>
+                    <h4 class="form_items_title">选项{{i}}<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm['optionContent[{{$index}}]'].$invalid && problemForm.submitted">此为必填项</span></h4>
+                    <input class="form-control form_items_content_md form_items_content" name="optionContent[{{$index}}]" ng-model="optionContent[$index]" required>
                 </div>
                 <h4 class="form_items_title">正确选项<span class="error glyphicon glyphicon-exclamation-sign" ng-show="problemForm.rightOption.$invalid && problemForm.submitted">此为必填项</span></h4>
                 <select class="form-control form_items_content_selecter form_items_content" name="rightOption" ng-model="problem.rightOption" ng-options="o for o in optionArray" required></select>

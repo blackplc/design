@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html><html>
     <head>
         <meta charset="utf-8">
         <link rel="shortcut icon" href="w.ico" >
@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="js/tools/css/fileinput.min.css">
         <!--防止被搜索引擎转码-->
-        <!--<meta http-equiv="Cache-Control" content="no-transform " />-->
-        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+        <meta http-equiv="Cache-Control" content="no-transform"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>在线作业系统</title>
         <script src="js/tools/jquery-3.2.1.min.js"></script>
@@ -16,10 +16,9 @@
         <script src="js/tools/bootstrap.js"></script>
         <script src="js/tools/js/locales/zh.js"></script>
         <script src="js/tools/layer.js"></script>
-        <!--<script src="js/tools/angular.min.js"></script>-->
     </head>
     <body ng-app="gP">
-        <div id="background" ui-view style="display: flex;height: 100%;width: 100%;justify-content: center;"></div>
+        <div id="background" ui-view style="display: flex;height: 100vh;width: 100vw;justify-content: center;"></div>
         <script src="js/tools/angular.min.js"></script>
         <script src="js/tools/angular-route.js"></script>
         <script src="js/tools/angular-ui-router.js"></script>
@@ -29,6 +28,7 @@
         <script src="js/static.js"></script>
         <script src="js/app.js"></script>
         <script src="js/api.js"></script>
+        <script src="js/storage.js"></script>
         <script src="js/login.js"></script>
         <script src="js/main.js"></script>
         <script src="js/problem/problemList.js"></script>
